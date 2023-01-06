@@ -107,13 +107,14 @@ class ChangeNameView(UpdateAPIView):
 
 class MovieView(viewsets.ModelViewSet):
     serializer_class = MovieSerializer
-    # noinspection PyUnresolvedReferences
+    # # noinspection PyUnresolvedReferences
     # queryset = Movie.objects.all()
 
     def get_queryset(self):
         # noinspection PyUnresolvedReferences
         queryset = Movie.objects.all()
 
+        movie_id = self.request.query_params.get('movie_id')
         genre_id = self.request.query_params.get('genre_id')
         name = self.request.query_params.get('name')
 
@@ -122,6 +123,9 @@ class MovieView(viewsets.ModelViewSet):
 
         if name is not None:
             queryset = queryset.filter(name=name)
+
+        if movie_id is not None:
+            queryset = queryset.filter(id=movie_id)
 
         return queryset
 

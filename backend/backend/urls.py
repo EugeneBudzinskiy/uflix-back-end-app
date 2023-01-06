@@ -27,7 +27,7 @@ from rest_framework import routers
 from rest_framework_simplejwt.views import TokenRefreshView
 
 # create a router object
-router = routers.DefaultRouter()
+router = routers.DefaultRouter(trailing_slash=False)
 
 # register the router
 router.register(r'movies', views.MovieView, 'movie')
